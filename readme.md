@@ -18,6 +18,7 @@ go-pay/
 │── cmd/                   # Application entry points
 │   ├── api/               # REST/gRPC server
 │   ├── worker/            # Background workers for async processing
+│── common/                # Common files
 │── config/                # Configuration files
 │── internal/              # Hexagonal Core (Business Logic)
 │   ├── domain/            # Core business entities
@@ -26,8 +27,50 @@ go-pay/
 │   │   ├── payment.go     # Payment processing entity
 │   │   ├── transaction.go # Transactions & ledger tracking
 │   │   ├── subscription.go # Recurring payments & billing
-│   ├── repository/        # Data access layer
-│   ├── service/           # Business logic (Use Cases)
+│   ├── repository/
+│   │   │── auth/               # Authentication & authorization logic
+│   │   │   ├── auth_repository.go
+│   │   │   ├── auth_repository_test.go
+│   │   │── merchant/           # Merchant data handling
+│   │   │   ├── merchant_repository.go
+│   │   │   ├── merchant_repository_test.go
+│   │   │── customer/           # Customer data handling
+│   │   │   ├── customer_repository.go
+│   │   │   ├── customer_repository_test.go
+│   │   │── payment/            # Payment processing logic
+│   │   │   ├── payment_repository.go
+│   │   │   ├── payment_repository_test.go
+│   │   │── transaction/        # Transactions (charges, refunds, disputes)
+│   │   │   ├── transaction_repository.go
+│   │   │   ├── transaction_repository_test.go
+│   │   │── subscription/       # Subscription logic
+│   │   │   ├── subscription_repository.go
+│   │   │   ├── subscription_repository_test.go
+│   │   │── webhook/            # Webhook event processing
+│   │   │   ├── webhook_repository.go
+│   │   │   ├── webhook_repository_test.go
+│   │── service/
+│   │   │── auth/               # Authentication & Authorization service
+│   │   │   ├── auth_service.go
+│   │   │   ├── auth_service_test.go
+│   │   │── merchant/           # Business logic for merchants
+│   │   │   ├── merchant_service.go
+│   │   │   ├── merchant_service_test.go
+│   │   │── customer/           # Customer management logic
+│   │   │   ├── customer_service.go
+│   │   │   ├── customer_service_test.go
+│   │   │── payment/            # Payment processing logic
+│   │   │   ├── payment_service.go
+│   │   │   ├── payment_service_test.go
+│   │   │── transaction/        # Handling transactions (charge, refund, dispute)
+│   │   │   ├── transaction_service.go
+│   │   │   ├── transaction_service_test.go
+│   │   │── subscription/       # Subscription-based payments
+│   │   │   ├── subscription_service.go
+│   │   │   ├── subscription_service_test.go
+│   │   │── webhook/            # Webhook handling service
+│   │   │   ├── webhook_service.go
+│   │   │   ├── webhook_service_test.go
 │── migrations/            # Database schema migrations
 │── pkg/                   # Reusable utilities (encryption, tokenization, etc.)
 │── scripts/               # Deployment & automation scripts
